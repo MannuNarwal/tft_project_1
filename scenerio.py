@@ -46,5 +46,18 @@ def test_different_date():
   assert data == DIFFERENT_DATE, "FAILED - Wrong error message"
 
 
+def test_filter():
+  driver = getUrlDriver(main_url)
+  click_button(driver, By.CLASS_NAME, archive_button)
+  dropdown_button(driver, By.XPATH, gold_dropdown_xpath1,select_gold_xpath2)
+  select_date(driver,By.XPATH,FROM_x1,FROM_year_x2,FROM_month_x3,FROM_date_x4)
+  select_date(driver,By.XPATH,TO_x1,TO_year_x2,TO_month_x3,TO_date_x4)
+  click_button(driver, By.XPATH,show_button)
+  data = getElementData(driver, By.CLASS_NAME,err_class )
+  assert data == '', f"FAILED - Error message is coming - '{data}' , not able to show table."
+  
 
 
+
+
+  
