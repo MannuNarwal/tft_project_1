@@ -1,7 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from xfile import *
+from xfile import * 
 
 
 def getUrlDriver(url):
@@ -39,6 +39,8 @@ def dropdown_button(driver,by, xpath1, xpath2):
 
 # Selecting date button
 def select_date(driver,by,x1, x2, x3, x4):
+    
+    
     try:
         button = driver.find_element(by, x1)
         button.click()
@@ -58,3 +60,23 @@ def select_date(driver,by,x1, x2, x3, x4):
 def getElementData(driver, by, xpath):
     el = driver.find_element(by, xpath)
     return el.text
+
+
+def get_table_data(driver):
+    table_data = []
+    try:
+        table = driver.find_element(By.ID, 'tblArchive')
+            # Extracting table headers
+        headers = []
+        for th in table.find_elements(By.XPATH, './/thead/tr/th'):
+                headers.append(th.text.strip())
+                
+                
+    except Exception as e:
+        print(f"An error occurred while retrieving table data: {e}")
+    
+    return table_data   
+
+def assert_verfication(actual_value, expected_value,msg):
+    assert actual_value==expected_value, msg
+    

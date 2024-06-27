@@ -1,3 +1,4 @@
+
 import pytest
 from helper_func import *
 from selenium.webdriver.common.by import By
@@ -14,7 +15,8 @@ def test_no_filter_selected():
   click_button(driver, By.CLASS_NAME, archive_button)
   click_button(driver, By.XPATH,show_button)
   data = getElementData(driver, By.CLASS_NAME, err_class)
-  assert data == NO_SELECTED, "FAILED - Wrong error message"
+  assert_verfication(data,NO_SELECTED,"FAILED - Wrong error message")
+  
   
 def test_only_commodity():
   driver = getUrlDriver(main_url)
@@ -22,8 +24,8 @@ def test_only_commodity():
   dropdown_button(driver, By.XPATH, gold_dropdown_xpath1,select_gold_xpath2)
   click_button(driver, By.XPATH,show_button)
   data = getElementData(driver, By.CLASS_NAME, err_class)
-  assert data == ONLY_COMMODITY_SELECTED, "FAILED - Wrong error message"
-
+  assert_verfication(data,ONLY_COMMODITY_SELECTED,"FAILED - Wrong error message")
+    
 def test_from_date():
   driver = getUrlDriver(main_url)
   click_button(driver, By.CLASS_NAME, archive_button)
@@ -31,7 +33,8 @@ def test_from_date():
   select_date(driver,By.XPATH,FROM_x1,FROM_year_x2,FROM_month_x3,FROM_date_x4)
   click_button(driver, By.XPATH,show_button)
   data = getElementData(driver, By.CLASS_NAME, err_class)
-  assert data == ONLY_DATE_SELECTED, "FAILED - Wrong error message"
+  assert_verfication(data,ONLY_DATE_SELECTED,"FAILED - Wrong error message")
+  
   
 
   
@@ -43,7 +46,8 @@ def test_different_date():
   select_date(driver,By.XPATH,TO_x1,FROM_year_x2,FROM_month_x3,FROM_date_x4)
   click_button(driver, By.XPATH,show_button)
   data = getElementData(driver, By.CLASS_NAME, err_class)
-  assert data == DIFFERENT_DATE, "FAILED - Wrong error message"
+  assert_verfication(data,DIFFERENT_DATE,"FAILED - Wrong error message")
+ 
 
 
 def test_filter():
@@ -54,10 +58,6 @@ def test_filter():
   select_date(driver,By.XPATH,TO_x1,TO_year_x2,TO_month_x3,TO_date_x4)
   click_button(driver, By.XPATH,show_button)
   data = getElementData(driver, By.CLASS_NAME,err_class )
-  assert data == '', f"FAILED - Error message is coming - '{data}' , not able to show table."
+  assert_verfication(data,'',f"FAILED - Error message is coming - '{data}' , not able to show table.")
   
-
-
-
-
   
